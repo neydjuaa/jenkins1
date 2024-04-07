@@ -1,14 +1,16 @@
 pipeline {
     // pipeline est éxécuté sur n'importe quel agent disponible
-    agent any
-   
+    agent {
+        docker {
+            image 'node:21-alpine'
+        }
+    }
 
     stages {
      
         stage('build'){
             steps {
              sh 'npm -v'
- 
             }
         }
 
