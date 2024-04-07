@@ -1,9 +1,14 @@
 pipeline {
     // pipeline est éxécuté sur n'importe quel agent disponible
-    agent {
-        docker {
-            image 'node:21-alpine'
-        }
+    agent any
+
+    parameters {
+        string(name: 'NAME', defaultValue: 'M. Jenkins', description: 'Qui est-ce ?')
+        text(name: 'TEXT',defaultValue: 'un texte', description: 'une description')
+        booleanParam(name: 'TOGGLE', defaultValue: true, description: 'true ou false')
+        choice(name: 'CHOICE', choices: ['un','deux','trois'], description: 'liste')
+        password(name: 'PASSWORD', description: 'un mot de passe')
+
     }
     
 
@@ -13,27 +18,18 @@ pipeline {
     stages {
      
         stage('build'){
-        
-            options {
-                timestamps()
-            }
-            steps {
-             sh 'npm -v'
-             sleep 15
-             echo 'hahah'
+             steps {
+                echo "NAME: ${NAME}"
+                echo "TEXT: ${TEXT}"
+                echo "TOGGLE: ${TOGGLE}"
+                echo "CHOICE: ${CHOICE}"
+                echo "PASSWORD: ${PASSWORD}"
+
             }
         }
 
     }
 
-    post {
-        always {
-          echo 'always'
-        }
-        success{
-            echo 'success !'
-        }
-    }
 }
 
 
