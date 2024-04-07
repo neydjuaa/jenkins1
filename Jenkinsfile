@@ -19,6 +19,8 @@ pipeline {
             }
             steps {
              sh 'npm -v'
+             sh sleep 15
+             echo 'hahah'
             }
         }
 
