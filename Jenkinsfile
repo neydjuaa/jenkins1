@@ -2,8 +2,8 @@ pipeline {
     // pipeline est éxécuté sur n'importe quel agent disponible
     agent any
 
-    environment {
-        DEPLOY_TO = 'prod'
+    parameters {
+        booleanParam(name: 'DEPLOY_TO', defaultValue: false, description: 'production')
     }
     
     stages {
@@ -19,7 +19,7 @@ pipeline {
             when {
               allOf {
                 branch 'main'
-                environment name: 'DEPLOY_TO', value: 'prod'
+                equals expected: true, actual: params.DEPLOY_TO
               }
             }
 
