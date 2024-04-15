@@ -13,7 +13,7 @@ pipeline {
         stage('Deployment production'){
 
             when {
-                branch 'prod'
+                branch 'main'
             }
 
             steps {
