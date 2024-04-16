@@ -2,32 +2,53 @@ pipeline {
     // pipeline est éxécuté sur n'importe quel agent disponible
     agent any
 
-    parameters {
-        booleanParam(name: 'DEPLOY_TO', defaultValue: false, description: 'production')
-    }
-    
     stages {
+
+
+        stage('Build and test') {
+          matrix {
+
+            axes {
+
+                axis {
+                    name 'PLATFORM'
+                    values 'linux','macos','windows'
+                }
+
+                axis {
+                    name 'BROWSER'
+                    values 'firefox','chrome','safari'
+                }
+            }
+
+            stages {
+                stage('Build') {
+                    steps {
+                        echo "Construire pour ${PLATFORM} - ${BROWSER}" 
+                    }
+                }
+                stage('Test') {
+                    steps {
+                        echo "Test pour ${PLATFORM} - ${BROWSER}" 
+                    }
+                }
+            }
+
+
+          }
+
+
+
+        }
+
+
      
-        stage('build'){
-             steps {
-                echo 'build !'
-            }
-        }
-
         stage('Deployment production'){
-
-            when {
-              allOf {
-                branch 'main'
-                equals expected: true, actual: params.DEPLOY_TO
-              }
-            }
-
-            steps {
-
-                echo ' deploy '
+             steps {
+                echo 'deploy !'
             }
         }
+       
     }
 
 }
