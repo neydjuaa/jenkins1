@@ -6,33 +6,34 @@ pipeline {
 
 
         stage('Build and test') {
-          matrix {
 
-            axes {
+                matrix {
 
-                axis {
-                    name 'PLATFORM'
-                    values 'linux','macos','windows'
-                }
+                    axes {
 
-                axis {
-                    name 'BROWSER'
-                    values 'firefox','chrome','safari'
-                }
-            }
+                        axis {
+                            name 'PLATFORM'
+                            values 'linux','macos','windows'
+                        }
 
-            stages {
-                stage('Build') {
-                    steps {
-                        echo "Construire pour ${PLATFORM} - ${BROWSER}" 
+                        axis {
+                            name 'BROWSER'
+                            values 'firefox','chrome','safari'
+                        }
+                    }
+
+                stages {
+                    stage('Build') {
+                        steps {
+                            echo "Construire pour ${PLATFORM} - ${BROWSER}" 
+                        }
+                    }
+                    stage('Test') {
+                        steps {
+                            echo "Test pour ${PLATFORM} - ${BROWSER}" 
+                        }
                     }
                 }
-                stage('Test') {
-                    steps {
-                        echo "Test pour ${PLATFORM} - ${BROWSER}" 
-                    }
-                }
-            }
 
 
           }
