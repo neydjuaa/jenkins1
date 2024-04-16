@@ -16,21 +16,23 @@ pipeline {
                             values 'linux','macos','windows'
                         }
 
-                        axis {
-                            name 'BROWSER'
-                            values 'firefox','chrome','safari'
-                        }
                     }
 
                 stages {
                     stage('Build') {
                         steps {
-                            echo "Construire pour ${PLATFORM} - ${BROWSER}" 
+                            echo "Construire pour ${PLATFORM} " 
                         }
                     }
                     stage('Test') {
                         steps {
-                            echo "Test pour ${PLATFORM} - ${BROWSER}" 
+                            echo "Test pour ${PLATFORM} "
+                        }
+                    }
+
+                    stage('Deploy'){
+                        steps{
+                            echo "Deploiement sur ${PLATFORM}"
                         }
                     }
                 }
