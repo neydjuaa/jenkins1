@@ -3,6 +3,7 @@ pipeline {
 
     tools {
        gradle 'gradle8.6' 
+       nodejs 'node21'
     }
 
     stages {
@@ -10,6 +11,7 @@ pipeline {
             steps {
             
                 sh 'gradle -v'
+                sh 'node -v'
 
             }
         }
