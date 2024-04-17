@@ -46,11 +46,7 @@ pipeline {
           }
 
 
-
-
         }
-
-
      
         stage('Deployment production'){
              steps {
