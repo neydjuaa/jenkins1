@@ -13,7 +13,7 @@ pipeline {
 
         post {
             success {
-                  emailext(to: 'marslandevops@gmail.com' , body: 'test body' , subject:' test subject')
+                  emailext(to: 'marslandevops@gmail.com' , body: '$DEFAULT_CONTENT' , subject:'$DEFAULT_SUBJECT')
             }
         }
 }
