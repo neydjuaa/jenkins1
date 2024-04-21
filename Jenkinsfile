@@ -8,11 +8,13 @@ pipeline {
             }
         }
 
+    }
+
+
         post {
             success {
                   emailext(to: 'marslandevops@gmail.com' , body: 'test body' , subject:' test subject')
             }
         }
-    }
 }
 
