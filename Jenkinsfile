@@ -1,24 +1,18 @@
 pipeline {
     agent any 
 
-    tools {
-       gradle 'gradle8.6' 
-       nodejs 'node21'
-    }
-
     stages {
         stage('build') {
             steps {
-            
-                sh 'gradle -v'
-                sh 'node -v'
+              echo 'hello'
+            }
+        }
 
+        post {
+            success {
+                  emailext(to: 'marslandevops@gmail.com' , body: 'test body' , subject:' test subject')
             }
         }
     }
 }
-
-
-
-
 
